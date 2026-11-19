@@ -1,0 +1,127 @@
+(() => {
+  'use strict';
+
+  const preview = new URLSearchParams(location.search).get('view') === 'a' ? 'a' : 'b';
+  const previewSwitch = document.querySelector('[data-preview-switch]');
+  previewSwitch.querySelector(`[data-preview-link="${preview}"]`).setAttribute('aria-current', 'true');
+  document.querySelector('[data-ava-media]').hidden = preview !== 'a';
+  previewSwitch.hidden = false;
+
+  const dialogues = {
+    product: ['Что можете рассказать об этой модели?', 'Подскажите название. Я найду описание модели и расскажу, для каких задач она подходит.'],
+    spec: ['Где посмотреть рабочий диапазон этой модели?', 'Назовите модель, и я проверю её техническую документацию.'],
+    compare: ['Чем отличаются эти две модели?', 'Назовите обе модели. Я сверю параметры по документам. Что важнее для вашей задачи?'],
+    need: ['Я пока не знаю, какую модель выбрать.', 'Расскажите, где и как вы планируете её использовать. Проверю, какие модели стоит рассмотреть.'],
+    lead: ['Можно обсудить это с менеджером после выставки?', 'Да. Оставьте контакт, и я передам его менеджеру вместе с вашим вопросом.'],
+  };
+
+  const dialogue = document.querySelector('[data-dialogues]');
+  const choices = [...dialogue.querySelectorAll('[data-dialogue]')];
+  choices.forEach(button => button.addEventListener('click', () => {
+    const [question, answer] = dialogues[button.dataset.dialogue];
+    dialogue.querySelector('[data-question]').textContent = question;
+    dialogue.querySelector('[data-answer]').textContent = answer;
+    choices.forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
+  }));
+
+  const main = document.querySelector('.presentation');
+  const slides = [...main.querySelectorAll('[data-slide]')];
+  const dock = document.querySelector('.deck-dock');
+  const steps = dock.querySelector('[data-steps]');
+  const count = dock.querySelector('[data-count]');
+  const prev = dock.querySelector('[data-prev]');
+  const next = dock.querySelector('[data-next]');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const interactive = 'button,a,input,select,textarea,label,video,form,[contenteditable="true"]';
+  const buttons = slides.map(slide => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = slide.dataset.slide;
+    button.addEventListener('click', () => navigate(slide.id));
+    steps.append(button);
+    return button;
+  });
+  let current = 0;
+
+  function display(index, focusHeading) {
+    current = index;
+    slides.forEach((slide, position) => {
+      slide.hidden = position !== index;
+      if (slide.hidden) slide.querySelector('video')?.pause();
+    });
+    buttons.forEach((button, position) => {
+      if (position === index) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+    });
+    prev.disabled = index === 0;
+    next.disabled = index === slides.length - 1;
+    count.textContent = `${String(index + 1).padStart(2, '0')} / ${slides.length}`;
+
+    const active = buttons[index];
+    const delta = active.getBoundingClientRect().left - steps.getBoundingClientRect().left;
+    if (delta < 0 || delta + active.offsetWidth > steps.clientWidth) {
+      steps.scrollTo({ left: steps.scrollLeft + delta - 8, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    }
+    if (focusHeading) {
+      const heading = slides[index].querySelector('h1,h2');
+      heading.tabIndex = -1;
+      heading.focus({ preventScroll: true });
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function navigate(id) {
+    const index = slides.findIndex(slide => slide.id === id);
+    if (index === -1) return;
+    if (location.hash !== `#${id}`) history.pushState(null, '', `#${id}`);
+    display(index, true);
+  }
+
+  function shift(delta) {
+    const slide = slides[current + delta];
+    if (slide) navigate(slide.id);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const id = link.hash.slice(1);
+    if (!slides.some(slide => slide.id === id)) return;
+    link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      navigate(id);
+    });
+  });
+
+  prev.addEventListener('click', () => shift(-1));
+  next.addEventListener('click', () => shift(1));
+  document.addEventListener('keydown', event => {
+    if (event.altKey || event.metaKey || event.ctrlKey || event.shiftKey || event.target.closest(interactive)) return;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      shift(event.key === 'ArrowRight' ? 1 : -1);
+    }
+  });
+
+  let touchStart;
+  main.addEventListener('touchstart', event => {
+    touchStart = event.touches.length === 1 && !event.target.closest(interactive) ? event.touches[0] : null;
+  }, { passive: true });
+  main.addEventListener('touchcancel', () => { touchStart = null; }, { passive: true });
+  main.addEventListener('touchend', event => {
+    if (!touchStart) return;
+    const x = event.changedTouches[0].clientX - touchStart.clientX;
+    const y = event.changedTouches[0].clientY - touchStart.clientY;
+    touchStart = null;
+    if (Math.abs(x) > 65 && Math.abs(x) > 1.8 * Math.abs(y)) shift(x < 0 ? 1 : -1);
+  }, { passive: true });
+
+  function sync(focusHeading) {
+    const index = slides.findIndex(slide => `#${slide.id}` === location.hash);
+    if (index >= 0 || !location.hash) display(Math.max(0, index), focusHeading);
+  }
+
+  dock.hidden = false;
+  display(0, false);
+  sync(false);
+  window.addEventListener('hashchange', () => sync(true));
+})();

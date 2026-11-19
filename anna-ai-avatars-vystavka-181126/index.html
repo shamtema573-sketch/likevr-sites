@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Предложение LikeVR по разработке голосового AI-консультанта для трёх выставочных киосков.">
+  <title>AI-консультант для выставки · LikeVR</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+  <script defer src="presentation.js"></script>
+</head>
+<body>
+  <a class="skip" href="#presentation">К содержанию</a>
+  <header class="mast">
+    <a class="brand" href="#project"><img src="assets/likevr.png" width="404" height="188" alt="LikeVR"></a>
+    <span class="mast-title">Коммерческое предложение</span>
+    <a class="mast-action" href="#pricing">Стоимость <span aria-hidden="true">→</span></a>
+  </header>
+
+  <main id="presentation" class="presentation" tabindex="-1">
+    <section class="slide cover" id="project" data-slide="Проект" aria-labelledby="project-title">
+      <div class="cover-copy">
+        <p class="eyebrow">Выставочное решение LikeVR</p>
+        <h1 id="project-title">AI-консультант <span>для выставки</span></h1>
+        <p class="lead">Три интерактивные точки, голосовое взаимодействие и единая база знаний о вашей продукции.</p>
+        <div class="actions">
+          <a class="button primary" href="#character-video">Смотреть видео <span aria-hidden="true">▶︎</span></a>
+          <a class="button secondary" href="#capabilities">Возможности <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <figure class="cover-visual">
+        <img src="assets/character-cover.webp" width="900" height="868" alt="Оригинальный цифровой персонаж LikeVR в бело-чёрном футуристическом костюме. Кадр из демонстрационного видео." fetchpriority="high">
+        <figcaption><span class="signal"></span> Оригинальный персонаж LikeVR</figcaption>
+      </figure>
+    </section>
+
+    <section class="slide" id="capabilities" data-slide="Возможности" aria-labelledby="capabilities-title">
+      <div class="slide-heading"><p class="eyebrow">Возможности</p><h2 id="capabilities-title">Консультирует и помогает выбрать продукт</h2></div>
+      <div class="feature-grid">
+        <article class="feature"><h3>Разговаривает голосом</h3><p>Принимает устные вопросы и отвечает голосом персонажа.</p></article>
+        <article class="feature"><h3>Знает ассортимент</h3><p>Отвечает на вопросы о продукции и уточняет, для какой задачи посетитель ищет решение.</p></article>
+        <article class="feature"><h3>Находит характеристики</h3><p>Ищет нужные параметры в каталоге и технической документации.</p></article>
+        <article class="feature"><h3>Сравнивает модели</h3><p>Сопоставляет параметры по документам и поясняет различия.</p></article>
+        <article class="feature"><h3>Объясняет технические детали</h3><p>Рассказывает, что означают характеристики и как они связаны с задачей посетителя.</p></article>
+        <article class="feature feature-accent"><h3>Передаёт запрос менеджеру</h3><p>Предлагает оставить контакт и передаёт его вместе с интересом посетителя.</p></article>
+      </div>
+    </section>
+
+    <section class="slide" id="scenarios" data-slide="Диалоги" aria-labelledby="scenarios-title">
+      <div class="slide-heading"><p class="eyebrow">Сценарии взаимодействия</p><h2 id="scenarios-title">Как звучит диалог</h2></div>
+      <div class="dialog-layout" data-dialogues>
+        <div class="dialog-list" aria-label="Примеры диалогов">
+          <button type="button" data-dialogue="product" aria-pressed="true">Вопрос о продукте</button>
+          <button type="button" data-dialogue="spec" aria-pressed="false">Поиск характеристики</button>
+          <button type="button" data-dialogue="compare" aria-pressed="false">Сравнение моделей</button>
+          <button type="button" data-dialogue="need" aria-pressed="false">Уточнение потребности</button>
+          <button type="button" data-dialogue="lead" aria-pressed="false">Передача контакта</button>
+        </div>
+        <div class="dialog-screen" aria-live="polite">
+          <div class="bubble question"><small>Посетитель</small><p data-question>Что можете рассказать об этой модели?</p></div>
+          <div class="bubble answer"><small>AI-консультант</small><p data-answer>Подскажите название. Я найду описание модели и расскажу, для каких задач она подходит.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="system" data-slide="Решение" aria-labelledby="system-title">
+      <div class="slide-heading"><p class="eyebrow">Устройство решения</p><h2 id="system-title">Три киоска работают одновременно</h2><p class="lead">У каждого посетителя своя сессия. Все три киоска обращаются к общей базе примерно из 50 PDF.</p></div>
+      <ol class="flow">
+        <li><strong>Подойти к киоску</strong><span>Выбрать свободную точку</span></li>
+        <li><strong>Задать вопрос</strong><span>Обратиться голосом</span></li>
+        <li><strong>Поиск в документах</strong><span>AI находит относящиеся к вопросу сведения</span></li>
+        <li><strong>Подготовка ответа</strong><span>AI формулирует ответ по материалам</span></li>
+        <li><strong>Голосовой ответ</strong><span>Персонаж озвучивает ответ</span></li>
+        <li><strong>Передача запроса</strong><span>Посетитель может оставить контакты</span></li>
+      </ol>
+      <p class="callout">Если в документах недостаточно данных, консультант может предложить передать вопрос менеджеру.</p>
+    </section>
+
+    <section class="slide" id="visuals" data-slide="Персонажи" aria-labelledby="visuals-title">
+      <div class="slide-heading heading-row">
+        <div><p class="eyebrow">Визуальные направления</p><h2 id="visuals-title">Три варианта персонажа</h2></div>
+        <nav class="preview-switch" aria-label="Сравнить оформление" data-preview-switch hidden>
+          <a href="?view=a#visuals" data-preview-link="a">A · с кадром Ava</a>
+          <a href="?view=b#visuals" data-preview-link="b">B · без кадра Ava</a>
+        </nav>
+      </div>
+      <div class="visual-grid">
+        <article class="visual-card visual-highlight">
+          <a class="visual-frame original" href="#character-video" aria-label="Смотреть видео LikeVR Original"><img src="assets/character-cover.webp" width="900" height="868" alt="" loading="lazy"><span class="play"><span aria-hidden="true">▶︎</span> Смотреть видео</span></a>
+          <div class="visual-copy"><h3>LikeVR Original</h3><p>Адаптируем персонажа из демонстрационного видео. Изменение тела или костюма доступно как опция за 40 000 ₽.</p></div>
+        </article>
+        <article class="visual-card webgpu-card">
+          <figure class="ava-media" data-ava-media hidden>
+            <img src="assets/ava-demo.webp" width="1393" height="752" alt="Аватар Ava из демо townbox на Hugging Face" loading="lazy">
+          </figure>
+          <div class="visual-copy">
+            <h3>WebGPU Ready</h3>
+            <p>Сборка на базе готового WebGPU-решения. Ava показывает, как может выглядеть такой персонаж.</p>
+            <a class="text-link" href="https://huggingface.co/spaces/townbox/ava" target="_blank" rel="noopener">Открыть интерактивное демо Ava</a>
+          </div>
+        </article>
+        <article class="visual-card external-card">
+          <div class="visual-copy"><h3>External Character</h3><p>Подберём и согласуем готового персонажа. Покупка модели, подготовка мимики и синхронизация губ входят в стоимость.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="slide" id="pricing" data-slide="Стоимость" aria-labelledby="pricing-title">
+      <div class="slide-heading heading-row"><div><p class="eyebrow">Коммерческое предложение</p><h2 id="pricing-title">Три комплектации для трёх точек</h2></div><a class="button secondary" href="#calculator">Подобрать опции <span aria-hidden="true">→</span></a></div>
+      <div data-pricing></div>
+      <p class="fine">Все три комплектации включают три компьютера. Сопровождение на три дня и ежемесячная эксплуатация рассчитываются отдельно.</p>
+    </section>
+
+    <section class="slide" id="calculator" data-slide="Калькулятор" aria-labelledby="calculator-title">
+      <div class="slide-heading heading-row"><div><p class="eyebrow">Калькулятор</p><h2 id="calculator-title">Соберите свою комплектацию</h2></div><a class="button secondary" href="calculator.html" data-separate>Открыть отдельно <span aria-hidden="true">→</span></a></div>
+      <div data-calculator></div>
+    </section>
+
+    <section class="slide" id="cases" data-slide="Кейсы" aria-labelledby="cases-title">
+      <div class="slide-heading"><p class="eyebrow">Работы LikeVR</p><h2 id="cases-title">Голосовые решения для выставок и киосков</h2></div>
+      <div class="cases">
+        <a class="case featured-case" href="https://likevr.ru/ar/proekty/ar-pomoshhnik/ai-konsultant-marti/" target="_blank" rel="noopener"><div><p class="eyebrow">Основной кейс · MARMA</p><h3>AI-консультант Марти</h3><p>Консультировал посетителей стенда MARMA на ПМЭФ.</p></div><span aria-hidden="true">→</span></a>
+        <a class="case" href="https://likevr.ru/mashinnoe-obuchenie/proekty/resheniya-na-baze-llm/ai-assistent-na-baze-llm-gigachat-api-i-whisper/" target="_blank" rel="noopener"><div><p class="eyebrow">Технический проект</p><h3>AI-ассистент на GigaChat API и Whisper</h3><p>Пример интеграции распознавания речи и языковой модели.</p></div><span aria-hidden="true">→</span></a>
+        <a class="case" href="https://likevr.ru/interaktivnye-tekhnologii/proekty/razrabotka-reshenij-dlya-kioskov/ai-kiosk-generatsiya-izobrazheniy-cherez-golosovye-prompty/" target="_blank" rel="noopener"><div><p class="eyebrow">Смежный кейс</p><h3>Голосовой AI-киоск</h3><p>Генерация изображений по устным запросам на интерактивном киоске.</p></div><span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="slide video-slide" id="character-video" data-slide="Видео" aria-labelledby="video-title">
+      <div class="slide-heading"><p class="eyebrow">Демонстрационное видео</p><h2 id="video-title">Оригинальный персонаж LikeVR</h2><p class="lead">Посмотрите готового цифрового персонажа в движении.</p></div>
+      <video controls playsinline preload="none" poster="assets/character-poster.webp" width="1280" height="720" aria-label="Демонстрационное видео оригинального персонажа LikeVR">
+        <source src="assets/likevr-character.mp4" type="video/mp4">
+        <a href="assets/likevr-character.mp4">Открыть видео</a>
+      </video>
+    </section>
+
+    <section class="slide contact-slide" id="contact" data-slide="Контакты" aria-labelledby="contact-title">
+      <div class="slide-heading"><p class="eyebrow">Контакты LikeVR</p><h2 id="contact-title">Обсудим ваш выставочный проект</h2></div>
+      <address class="contact-grid" data-contacts></address>
+    </section>
+  </main>
+
+  <noscript><p class="noscript">Для интерактивного расчёта и навигации по слайдам включите JavaScript.</p></noscript>
+  <footer class="deck-dock" hidden>
+    <nav class="deck-controls" aria-label="Навигация по презентации">
+      <button type="button" class="arrow-button" data-prev aria-label="Предыдущий слайд">←</button>
+      <div class="deck-steps" data-steps></div>
+      <span class="deck-count" data-count aria-live="polite"></span>
+      <button type="button" class="arrow-button" data-next aria-label="Следующий слайд">→</button>
+    </nav>
+  </footer>
+</body>
+</html>

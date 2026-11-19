@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Интерактивный расчёт выставочного AI-консультанта LikeVR.">
+  <title>Калькулятор AI-консультанта · LikeVR</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#calculator-main">К содержанию</a>
+  <header class="mast">
+    <a class="brand" href="index.html"><img src="assets/likevr.png" width="404" height="188" alt="LikeVR"></a>
+    <span class="mast-title">Коммерческое предложение</span>
+    <a class="mast-action" href="index.html#calculator" data-return>К презентации <span aria-hidden="true">→</span></a>
+  </header>
+  <main class="standalone" id="calculator-main" tabindex="-1">
+    <div class="slide-heading"><p class="eyebrow">Калькулятор</p><h1>Стоимость AI-консультанта</h1></div>
+    <div data-calculator></div>
+    <noscript><p>Для интерактивного расчёта включите JavaScript.</p></noscript>
+    <section class="standalone-contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Обсудить комплектацию</h2>
+      <address class="contact-grid" data-contacts></address>
+    </section>
+  </main>
+</body>
+</html>
