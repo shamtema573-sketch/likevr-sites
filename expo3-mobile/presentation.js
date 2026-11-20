@@ -67,7 +67,7 @@
   }
 
   toggle.addEventListener('click', () => {
-    const top = mobile ? parseFloat(getComputedStyle(slides[0]).scrollMarginTop) + 1 : 0;
+    const top = mobile ? mobileNav.getBoundingClientRect().bottom + 48 : 0;
     const index = mobile ? slides.reduce((visible, slide, position) =>
       slide.getBoundingClientRect().top <= top ? position : visible, 0
     ) : current;
@@ -165,10 +165,11 @@
 
   function sync(focusHeading) {
     const index = slides.findIndex(slide => `#${slide.id}` === location.hash);
-    if (index >= 0 || !location.hash) display(Math.max(0, index), focusHeading);
+    if (mobile !== useMobile()) applyView(Math.max(0, index));
+    else if (index >= 0 || !location.hash) display(Math.max(0, index), focusHeading);
   }
 
   applyView(anchorIndex());
   toggle.hidden = false;
-  window.addEventListener('hashchange', () => sync(true));
+  window.addEventListener('popstate', () => sync(true));
 })();
