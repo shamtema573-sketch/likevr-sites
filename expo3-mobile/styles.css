@@ -535,5 +535,5 @@ h3 { font-size: clamp(1.05rem, 1.65vw, 1.42rem); line-height: 1.15; letter-spaci
   .mobile-active { --section-offset: 4.5rem; }
   .mobile-active .mast { grid-template-columns: auto auto minmax(0, 1fr); }
   .mobile-active .mobile-navigation { grid-column: auto; grid-template-columns: minmax(0, 1fr); }
-  .mobile-active .mobile-navigation label { position: absolute; clip-path: inset(50%); }
+  .mobile-active .mobile-navigation label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 }
