@@ -67,10 +67,7 @@
   }
 
   toggle.addEventListener('click', () => {
-    const top = mobile ? mobileNav.getBoundingClientRect().bottom + 48 : 0;
-    const index = mobile ? slides.reduce((visible, slide, position) =>
-      slide.getBoundingClientRect().top <= top ? position : visible, 0
-    ) : current;
+    const index = mobile && location.hash ? anchorIndex() : current;
     const url = new URL(location.href);
     url.searchParams.set('view', mobile ? 'desktop' : 'mobile');
     url.hash = slides[index].id;
